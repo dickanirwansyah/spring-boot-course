@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idgenerali.backendmybatis.mapper.AgentMapper">
+    <select id="listAgent" resultType="com.idgenerali.backendmybatis.model.Agent">
+        SELECT
+        agent_code as agentCode,
+        first_name as firstName,
+        last_name as lastName,
+        email,
+        phone_number as PhoneNumber,
+        home_phone_number as homePhoneNumber,
+        address_name as addressName,
+        company_name as companyName,
+        status,
+        date_of_birth as dateOfBirth,
+        created_at as createdAt,
+        updated_at as updatedAt
+        FROM tbl_agent
+    </select>
+
+    <select id="findAgentByAgentCode" resultType="com.idgenerali.backendmybatis.model.Agent">
+        SELECT agent_code as agentCode, first_name as firstName, last_name as lastName,
+        email, phone_number as phoneNumber, home_phone_number as homePhoneNumber,
+        address_name as addressName, company_name as companyName, status, date_of_birth as dateOfBirth,
+        created_at as createdAt, updated_at as updatedAt FROM tbl_agent WHERE agent_code=#{agentCode}
+    </select>
+
+    <select id="findAgentByEmail" resultType="com.idgenerali.backendmybatis.model.Agent">
+        SELECT agent_code as agentCode, first_name as firstName, last_name as lastName,
+        email, phone_number as phoneNumber, home_phone_number as homePhoneNumber,
+        address_name as addressName, company_name as companyName, status, date_of_birth as dateOfBirth,
+        created_at as createdAt, updated_at as updatedAt FROM tbl_agent WHERE email=#{email}
+    </select>
+
+    <select id="findAgentByStatusTrue" resultType="com.idgenerali.backendmybatis.model.Agent">
+        SELECT
+            agent_code as agentCode,
+            first_name as firstName,
+            last_name as lastName,
+            email,
+            phone_number as phoneNumber,
+            home_phone_number as homePhoneNumber,
+            address_name as addressName,
+            company_name as companyName,
+            status
+        FROM tbl_agent
+        WHERE status = true
+        ORDER BY
+            first_name
+    </select>
+
+    <select id="findAgentByStatusFalse" resultType="com.idgenerali.backendmybatis.model.Agent">
+       SELECT
+        agent_code as agentCode,
+        first_name as firstName,
+        last_name as lastName,
+        email,
+        phone_number as phoneNumber,
+        home_phone_number as homePhoneNumber,
+        address_name as addressName,
+        company_name as companyName,
+        status
+        FROM tbl_agent
+        WHERE status = false
+        ORDER BY
+        first_name
+    </select>
+
+    <insert id="saveAgent" parameterType="com.idgenerali.backendmybatis.model.Agent">
+        INSERT INTO tbl_agent (
+            agent_code,
+            first_name,
+            last_name,
+            email,
+            phone_number,
+            home_phone_number,
+            address_name,
+            company_name,
+            status,
+            date_of_birth,
+            created_at,
+            updated_at)
+            VALUE
+            (upper(#{agent.agentCode}),
+            upper(#{agent.firstName}),
+            upper(#{agent.lastName}),
+            upper(#{agent.email}),
+            #{agent.phoneNumber},
+            #{agent.homePhoneNumber},
+            upper(#{agent.addressName}),
+            upper(#{agent.companyName}),
+            #{agent.status},
+            #{agent.dateOfBirth},
+            #{agent.createdAt},
+            #{agent.updatedAt})
+    </insert>
+
+    <update id="updateAgent" parameterType="com.idgenerali.backendmybatis.model.Agent">
+        UPDATE tbl_agent set
+            first_name = upper(#{agent.firstName}),
+            last_name = upper(#{agent.lastName}),
+            email = upper(#{agent.email}),
+            phone_number = #{agent.phoneNumber},
+            home_phone_number = #{agent.homePhoneNumber},
+            address_name = #{agent.addressName},
+            company_name = upper(#{agent.companyName}),
+            status = #{agent.status},
+            date_of_birth = #{agent.dateOfBirth},
+            created_at = #{agent.createdAt},
+            updated_at = #{agent.updatedAt}
+        WHERE agent_code = #{agent.agentCode}
+    </update>
+
+</mapper>

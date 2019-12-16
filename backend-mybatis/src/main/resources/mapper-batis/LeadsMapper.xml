@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idgenerali.backendmybatis.mapper.LeadsMapper">
+    <insert id="saveLeads" parameterType="com.idgenerali.backendmybatis.model.Leads">
+        INSERT INTO tbl_leads(first_name, last_name, dob, phone, status_leads_id)
+        VALUES (upper(#{leads.firstName}), upper(#{leads.lastName}), #{leads.dob}, #{leads.phone}, #{leads.statusLeadsId})
+    </insert>
+    <update id="updateLeads" parameterType="com.idgenerali.backendmybatis.model.Leads">
+        UPDATE tbl_leads set
+            first_name=upper(#{leads.firstName}),
+            last_name=upper(#{leads.lastName}),
+            dob=#{leads.dob},
+            phone=#{leads.phone},
+            status_leads_id=#{leads.statusLeadsId}
+        WHERE id=#{leads.id}
+    </update>
+    <select id="findByPhone" resultType="com.idgenerali.backendmybatis.model.Leads">
+        SELECT id, first_name as firstName, last_name as lastName, dob, phone, status_leads_id as statusLeadsId
+        from tbl_leads where phone=#{phone}
+    </select>
+    <select id="findById" resultType="com.idgenerali.backendmybatis.model.Leads">
+        SELECT id, first_name as firstName, last_name as lastName, dob, phone, status_leads_id as statusLeadsId
+        FROM tbl_leads where id=#{id}
+    </select>
+    <select id="findLeadsById" resultType="com.idgenerali.backendmybatis.model.Leads">
+        SELECT id, first_name as firstName, last_name as lastName, dob, phone, status_leads_id as statusLeadsId
+        FROM tbl_leads where id=#{id}
+    </select>
+    <select id="listLeads" resultType="com.idgenerali.backendmybatis.model.Leads">
+        SELECT id, first_name as firstName, last_name as lastName, dob, phone, status_leads_id as statusLeadsId
+        FROM tbl_leads
+    </select>
+<!--    <select id="joinLeadsAndStatusLeads" resultType="">-->
+<!--        select l.id, l.first_name, s.description from tbl_leads as l inner join tbl_status_leads s on(l.status_leads_id=s.status_leads);-->
+<!--    </select>-->
+</mapper>

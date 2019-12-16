@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idgenerali.backendmybatis.mapper.StatusLeadsMapper">
+    <select id="findByStatusId" resultType="com.idgenerali.backendmybatis.model.StatusLeads">
+        SELECT
+            status_leads as statusLeads,
+            description
+        FROM tbl_status_leads
+        WHERE status_leads = #{statusLeads}
+    </select>
+    <select id="listStatusLeads" resultType="com.idgenerali.backendmybatis.model.StatusLeads">
+        SELECT
+            status_leads as statusLeads,
+            description
+        FROM tbl_status_leads
+    </select>
+    <select id="findStatusLeadsById" resultType="com.idgenerali.backendmybatis.model.StatusLeads">
+        SELECT
+        status_leads as statusLeads,
+        description
+        FROM tbl_status_leads
+        WHERE status_leads = #{statusLeads}
+    </select>
+</mapper>

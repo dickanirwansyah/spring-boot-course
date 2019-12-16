@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idgenerali.backendmybatis.mapper.ProductMapper">
+    <select id="listProduct" resultType="com.idgenerali.backendmybatis.model.Product">
+        SELECT id, name, price, stock, category, created_at as createdAt, updated_at as updatedAt
+        FROM tbl_product
+    </select>
+    <select id="findById" resultType="int">
+        SELECT id, name, price, stock, category, created_at as createdAt,updated_at as updatedAt
+        FROM tbl_product where id=#{id}
+    </select>
+    <select id="findProductById" resultType="com.idgenerali.backendmybatis.model.Product">
+        SELECT id, name, price, stock, category, created_at as createdAt,updated_at as updatedAt
+        FROM tbl_product where id=#{id}
+    </select>
+    <select id="findByName" resultType="string">
+        SELECT id, name, price, stock, category, created_at as createdAt, updated_at as updatedAt
+        FROM tbl_product where name=#{name}
+    </select>
+    <select id="findProductByName" resultType="com.idgenerali.backendmybatis.model.Product">
+        SELECT id, name, price, stock, category, created_at as createdAt, updated_at as updatedAt
+        FROM tbl_product where name LIKE #{name}
+    </select>
+    <insert id="saveProduct" parameterType="com.idgenerali.backendmybatis.model.Product">
+        insert into tbl_product (name, price, stock, category, created_at, updated_at)
+        values (upper(#{product.name}), #{product.price}, #{product.stock}, upper(#{product.category}), #{product.createdAt}, #{product.updatedAt})
+    </insert>
+    <update id="updateProduct" parameterType="com.idgenerali.backendmybatis.model.Product">
+        update tbl_product set name = upper(#{product.name}), price=#{product.price}, stock=#{product.stock},
+        category=upper(#{product.category}), created_at=#{product.createdAt}, updated_at=#{product.updatedAt}
+        where id=#{product.id}
+    </update>
+    <delete id="deleteProduct" parameterType="com.idgenerali.backendmybatis.model.Product">
+        delete from tbl_product where id=#{id}
+    </delete>
+</mapper>
