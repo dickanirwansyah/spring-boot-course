@@ -82,10 +82,29 @@ public class PageController {
         servletResponse.getOutputStream().close();
     }
 
+    /** show detail vendor **/
+    @GetMapping(value = "/get-vendor")
+    public ModelAndView getUpdateVendor(@RequestParam(value = "id")Long id){
+        ModelAndView view = new ModelAndView();
+        RequestVendor requestVendor = vendorService.findVendorByDtoId(id);
+        view.setViewName("content/vendor-content-update");
+        view.addObject("requestVendor", requestVendor);
+        return view;
+    }
+
+    /** create new vendor **/
     @PostMapping(value = "/register-vendor")
     public String registerVendor(@ModelAttribute @Valid RequestVendor requestVendor){
         log.info("TEST INSERT VENDOR : "+requestVendor.toString());
         vendorService.createVendor(requestVendor);
-        return "redirect:/vendor";
+        return "redirect:/vendor-table";
+    }
+
+    /** update vendor **/
+    @PostMapping(value = "/update-vendor")
+    public String updateVendor(@ModelAttribute @Valid RequestVendor requestVendor){
+        log.info("TEST UPDATE VENDOR : "+requestVendor.toString());
+        vendorService.updateVendor(requestVendor.getId(), requestVendor);
+        return "redirect:/vendor-table";
     }
 }

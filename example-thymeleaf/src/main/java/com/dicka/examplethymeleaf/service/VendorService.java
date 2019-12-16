@@ -10,4 +10,5 @@ public interface VendorService {
     Vendor updateVendor(Long id, RequestVendor requestVendor);
     ArrayList<Vendor> listVendor();
     Vendor findVendorById(Long id);
+    RequestVendor findVendorByDtoId(Long id);
 }

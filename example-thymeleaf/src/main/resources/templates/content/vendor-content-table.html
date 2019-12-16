@@ -26,6 +26,10 @@
                                 <td>
                                     <img th:src="@{|/vendor-image-npwp?id=${vendor.id}|}" width="80px" height="80px"/>
                                 </td>
+                                <td>
+                                    <a class="btn btn-success" th:href="@{|/get-vendor?id=${vendor.id}|}">Update</a>&nbsp;
+                                    <a class="btn btn-default" th:href="@{|/delete-vendor?id=${vendor.id}|}">Delete</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

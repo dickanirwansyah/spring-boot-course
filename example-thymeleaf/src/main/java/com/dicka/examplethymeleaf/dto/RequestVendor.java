@@ -11,6 +11,8 @@ import java.io.Serializable;
 
 public class RequestVendor implements Serializable {
 
+    private Long id;
+
     @NotBlank(message = "first name cannot be null")
     private String firstName;
 
@@ -94,10 +96,20 @@ public class RequestVendor implements Serializable {
         this.coverBankAcc = coverBankAcc;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
     @Override
     public String toString() {
         return "RequestVendor{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", vendorType='" + vendorType + '\'' +
                 ", npwp='" + npwp + '\'' +

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:utext="${title}"></title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="row">
+                    <form class="form-horizontal"
+                          th:object="${requestVendor}"
+                          th:action="@{/update-vendor}"
+                          enctype="multipart/form-data"
+                          id="formVendor"
+                          method="post">
+                        <div class="form-group">
+                            <label>Id</label>
+                            <input type="text" class="form-control" th:field="*{id}"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Firstname</label>
+                            <input th:field="*{firstName}" type="text" class="form-control" placeholder="enter firstname"/>
+                            <small class="form-text text-muted">firstname cannot be null</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Lastname</label>
+                            <input th:field="*{lastName}" type="text" class="form-control" placeholder="enter lastname"/>
+                            <small class="form-text text-muted">lastname cannot be null</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Vendor Type</label>
+                            <select th:field="*{vendorType}" class="form-control">
+                                <option value="">-Choose One-</option>
+                                <option value="Personal">Personal</option>
+                                <option value="Organization">Organization</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Have Npwp</label>
+                            <select class="form-control" id="haveNpwp">
+                                <option value="">-Choose One-</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="divNpwpNo">
+                            <label>No.Npwp</label>
+                            <input th:field="*{npwp}" type="text" class="form-control" id="npwpNo" placeholder="no npwp"/>
+                        </div>
+                        <div class="form-group" id="divNpwFile">
+                            <label>Npwp File</label>
+                            <input th:field="*{npwpFile}" type="file" class="form-control" placeholder="npwp file"/>
+                        </div>
+                        <div class="form-group">
+                            <label>bank account</label>
+                            <input th:field="*{backAccount}" type="text" class="form-control" placeholder="back account"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Bank Name</label>
+                            <input th:field="*{bankName}" type="text" class="form-control" placeholder="bank name"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Have cover bank acc</label>
+                            <select class="form-control" id="haveCoverBank">
+                                <option value="">-Choose One-</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="divCoverBankAcc">
+                            <label>Cover bank acc</label>
+                            <input th:field="*{coverBankAcc}" type="file" placeholder="cover bank acc" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success" type="submit">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

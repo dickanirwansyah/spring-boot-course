@@ -4,6 +4,7 @@ $(document).ready(function(){
     $("#divNpwpNo").hide();
     $("#divCoverBankAcc").hide();
 
+
     $("#haveNpwp").change(function(){
         if($(this).val() === 'true'){
             $("#divNpwFile").show();
