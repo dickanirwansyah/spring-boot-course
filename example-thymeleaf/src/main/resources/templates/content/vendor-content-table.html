@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:utext="${title}"></title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="row">
+                    <table class="table table-hover table-striped" id="tabel-vendor">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Firstname</th>
+                                <th>Npwp Image</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="vendor : ${vendors}">
+                                <td th:utext="${vendor.id}"></td>
+                                <td th:utext="${vendor.firstName}"></td>
+                                <td>
+                                    <img th:src="@{|/vendor-image-npwp?id=${vendor.id}|}" width="80px" height="80px"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
