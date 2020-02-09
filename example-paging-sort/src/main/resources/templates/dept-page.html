@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+</head>
+<body>
+    <h2>Departments</h2>
+    <p th:each="dept : ${depts}">
+        <td th:utext="${dept}"></td>
+    </p>
+    <br/>
+    <a th:href="@{/departments(sort='dept,asc')}">In ascending order</a> <br/>
+    <a th:href="@{/departments(sort='dept,desc')}">In descending order</a>
+</body>
+</html>
