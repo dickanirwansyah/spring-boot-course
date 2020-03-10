@@ -1,4 +1,4 @@
-package com.dicka.jjwtbackend.config;
+package com.dicka.jjwtbackend.security;
 
 import com.dicka.jjwtbackend.security.AuthEntryPointJwt;
 import com.dicka.jjwtbackend.security.AuthTokenFilter;
@@ -64,6 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
 
-        httpSecurity.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(authenticationTokenFilter(),
+                UsernamePasswordAuthenticationFilter.class);
     }
 }

@@ -1,4 +1,4 @@
-package com.dicka.jjwtbackend.config;
+package com.dicka.jjwtbackend.security;
 
 import com.dicka.jjwtbackend.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
