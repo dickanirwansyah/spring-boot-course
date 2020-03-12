@@ -21,7 +21,7 @@ public class DistrictDataService {
     private List<District> districtList = new ArrayList<>();
     private final OkHttpClient httpClient = new OkHttpClient();
 
-    @PostConstruct
+    //@PostConstruct
     public void fetchingDataDistrict() throws Exception{
 
         Request request = new Request.Builder()
