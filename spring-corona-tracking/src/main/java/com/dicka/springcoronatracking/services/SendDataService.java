@@ -23,6 +23,9 @@ public class SendDataService {
     private final OkHttpClient httpClient = new OkHttpClient();
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
+    //example URI json from https://randomuser.me/api/
+    private static final String SERVICE_RANDOM_USER = "https://randomuser.me/api/";
+
     //example json array
     private static final String jsonArray =   "{"
             + "  \"geodata\": ["
@@ -70,7 +73,46 @@ public class SendDataService {
         }
     }
 
-    @PostConstruct
+    //@PostConstruct
+    public void parseingJsonArrayRandomUser() throws IOException{
+        Request request = new Request.Builder()
+                .url(SERVICE_RANDOM_USER)
+                .build();
+
+        try(Response response = httpClient.newCall(request).execute()){
+            if(!response.isSuccessful()) throw new IOException("error !");
+            //System.out.println(response.body().string());
+            final JSONObject obj = new JSONObject(response.body().string());
+            final JSONArray results = obj.getJSONArray("results");
+            //System.out.println(results);
+            final int n = results.length();
+            for (int i=0; i < n; i++){
+                final JSONObject objectPerson = results.getJSONObject(i);
+                String gender = objectPerson.getString("gender");
+
+                //object name
+                String nameOfTitle = objectPerson.getJSONObject("name").getString("title");
+                String nameOfFirst = objectPerson.getJSONObject("name").getString("first");
+                String nameOfLast = objectPerson.getJSONObject("name").getString("last");
+
+                //location
+                int locationStreetNumber = objectPerson.getJSONObject("location").getJSONObject("street").getInt("number");
+                String locationStreetName = objectPerson.getJSONObject("location").getJSONObject("street").getString("name");
+                String locationCity = objectPerson.getJSONObject("location").getString("city");
+
+                //print data
+                System.out.println("GENDER : "+gender);
+                System.out.println("NAME OF TITLE : "+nameOfTitle);
+                System.out.println("NAME OF FIRST : "+nameOfFirst);
+                System.out.println("NAME OF LAST : "+nameOfLast);
+                System.out.println("LOCATION STREET NUMBER : "+locationStreetNumber);
+                System.out.println("LOCATION STREET NAME : "+locationStreetName);
+                System.out.println("LOCATION CITY : "+locationCity);
+            }
+        }
+    }
+
+    //@PostConstruct
     public void parsingJsonArray(){
         final JSONObject obj = new JSONObject(jsonArray);
         final JSONArray geoDataArray = obj.getJSONArray("geodata");
